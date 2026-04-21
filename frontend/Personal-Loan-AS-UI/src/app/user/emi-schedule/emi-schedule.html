@@ -1,0 +1,132 @@
+
+
+<section class="px-8 py-6 max-w-7xl mx-auto">
+
+  <!-- ACTIVE LOAN VIEW -->
+  <ng-container *ngIf="hasActiveLoan; else noActiveLoan">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800">
+          EMI Schedule
+        </h2>
+        <p class="text-sm text-gray-500">
+          Monthly repayment breakdown
+        </p>
+      </div>
+    </div>
+
+    <!-- EMI TABLE -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+       <!-- EMI Table Card -->
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+    <table class="w-full text-sm">
+      <thead class="bg-gray-100 text-gray-700">
+        <tr>
+          <th class="p-4 text-left font-semibold">EMI #</th>
+          <th class="p-4 text-left font-semibold">Due Date</th>
+          <th class="p-4 text-left font-semibold">EMI Amount</th>
+          <th class="p-4 text-left font-semibold">Total Payable</th>
+          <th class="p-4 text-left font-semibold">Status</th>
+          <th class="p-4 text-left font-semibold">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let emi of emis"
+          class="border-t hover:bg-gray-50 transition">
+
+          <!-- EMI Number -->
+          <td class="p-4 font-medium text-gray-800">
+            {{ emi.emiNumber }}
+          </td>
+
+          <!-- Due Date -->
+          <td class="p-4 text-gray-700">
+            {{ emi.dueDate | date:'dd MMM yyyy' }}
+          </td>
+
+          <!-- EMI Amount -->
+          <td class="p-4 text-gray-700">
+            ₹{{ emi.emiAmount }}
+          </td>
+
+          <!-- Total Payable -->
+          <td class="p-4 text-gray-700 font-semibold">
+            ₹{{ emi.totalPayableAmount }}
+          </td>
+
+          <!-- Status -->
+          <td class="p-4">
+            <span
+              class="px-3 py-1 rounded-full text-xs font-semibold"
+              [ngClass]="{
+                'bg-green-100 text-green-700': emi.emiStatus === 'PAID',
+                'bg-yellow-100 text-yellow-700': emi.emiStatus === 'PENDING',
+                'bg-red-100 text-red-700': emi.emiStatus === 'OVERDUE'
+              }">
+              {{ emi.emiStatus }}
+            </span>
+          </td>
+
+          <!-- Action -->
+          <td class="p-4">
+            <button
+              *ngIf="emi.emiStatus === 'PENDING'"
+              (click)="payEmi(emi)"
+              class="px-4 py-2 rounded-xl bg-green-600 text-white font-semibold
+                     hover:bg-green-700 transition">
+              Pay EMI
+            </button>
+
+            <span *ngIf="emi.emiStatus !== 'PENDING'" class="text-gray-400">
+              —
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+    </div>
+
+  </ng-container>
+
+  <!-- NO ACTIVE LOAN VIEW -->
+  <ng-template #noActiveLoan>
+    <div class="flex flex-col items-center justify-center h-[60vh] text-center">
+
+      <div class="bg-gray-100 p-6 rounded-full mb-4">
+        <!-- Icon (optional) -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-12 w-12 text-gray-400"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+          <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2
+                   3 .895 3 2-1.343 2-3 2m0-8v.01M12 16v.01M21
+                   12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">
+        No Active EMI
+      </h2>
+
+      <p class="text-gray-500 max-w-md mb-6">
+        You don’t have any active loan or EMI at the moment.
+        Once you take a loan, your EMI schedule will appear here.
+      </p>
+
+    </div>
+  </ng-template>
+
+</section>
+

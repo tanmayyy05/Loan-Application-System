@@ -1,0 +1,215 @@
+<section class="px-8 py-6 max-w-7xl mx-auto">
+
+    <!-- Heading Card -->
+    <div class="bg-white rounded-2xl shadow-md p-6 mb-6">
+        <h2 class="text-3xl font-bold text-gray-800">My Loans</h2>
+        <p class="text-gray-500 mt-1">Track and manage all your loan applications</p>
+    </div>
+
+    <mat-tab-group>
+  <mat-tab label="My Active loan">
+     <!-- Table Card -->
+    <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <table class="w-full text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+                <tr>
+                    <th class="p-4 text-left font-semibold">Loan ID</th>
+                    <th class="p-4 text-left font-semibold">Amount</th>
+                    <th class="p-4 text-left font-semibold">Status</th>
+                    <th class="p-4 text-left font-semibold">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr
+                    *ngFor="let loan of loans"
+                    class="border-t hover:bg-gray-50 transition"
+                >
+                    <td class="p-4 font-medium text-gray-800">
+                        {{ loan.loanId }}
+                    </td>
+
+                    <td class="p-4 text-gray-700">
+                        ₹{{ loan.amount }}
+                    </td>
+
+                    <td class="p-4">
+                        <span
+                            class="px-3 py-1 rounded-full text-xs font-semibold"
+                            [ngClass]="{
+                                'bg-yellow-100 text-yellow-700': loan.status === 'PENDING',
+                                'bg-green-100 text-green-700': loan.status === 'APPROVED',
+                                'bg-red-100 text-red-700': loan.status === 'REJECTED'
+                            }"
+                        >
+                            {{ loan.status }}
+                        </span>
+                    </td>
+
+                    <td class="p-4">
+                        <a
+                            [routerLink]="['/user/my-loans', loan.loanId]"
+                            class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold"
+                        >
+                            View Details →
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> -->
+
+    <div *ngIf="!isLoading; else loading" class="overflow-x-auto">
+
+  <table class="min-w-full border border-slate-200 rounded-xl overflow-hidden">
+
+    <thead class="bg-slate-100 text-xs uppercase text-slate-600">
+      <tr>
+        <th class="px-4 py-3 text-left">Account ID</th>
+        <th class="px-4 py-3 text-left">Loan Amount</th>
+        <th class="px-4 py-3 text-left">Interest</th>
+        <th class="px-4 py-3 text-left">Tenure</th>
+        <th class="px-4 py-3 text-left">EMI</th>
+        <th class="px-4 py-3 text-left">Outstanding</th>
+        <th class="px-4 py-3 text-left">Status</th>
+        <th class="px-4 py-3 text-left">Disbursed</th>
+        <th class="px-4 py-3 text-left">Closure</th>
+        <th class="px-4 py-3 text-left">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let acc of loanAccounts"
+          class="border-t hover:bg-slate-50 transition">
+
+        <td class="px-4 py-3 font-medium">
+          {{ acc.id }}
+        </td>
+
+        <td class="px-4 py-3">
+          ₹{{ acc.loanAmount | number:'1.0-2' }}
+        </td>
+
+        <td class="px-4 py-3">
+          {{ acc.interestRate }}%
+        </td>
+
+        <td class="px-4 py-3">
+          {{ acc.tenureMonths }} months
+        </td>
+
+        <td class="px-4 py-3">
+          ₹{{ acc.emiAmount | number:'1.0-2' }}
+        </td>
+
+        <td class="px-4 py-3">
+          ₹{{ acc.outstandingBalance | number:'1.0-2' }}
+        </td>
+
+        <td class="px-4 py-3">
+          <span
+            class="px-2 py-1 text-xs font-semibold rounded"
+            [ngClass]="{
+              'bg-green-100 text-green-700': acc.loanAccountStatus === 'ACTIVE',
+              'bg-gray-100 text-gray-700': acc.loanAccountStatus === 'CLOSED'
+            }">
+            {{ acc.loanAccountStatus }}
+          </span>
+        </td>
+
+        <td class="px-4 py-3">
+          {{ acc.disbursedDate || '-' }}
+        </td>
+
+        <td class="px-4 py-3">
+          {{ acc.closureDate || '-' }}
+        </td>
+
+        <td class="px-4 py-3">
+  <button
+    mat-raised-button
+    color="primary"
+    [routerLink]="['/user/loan-details', acc.id]"
+
+  >
+    View Details
+  </button>
+</td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+<ng-template #loading>
+  <div class="p-6 text-center text-slate-500">
+    Loading loan accounts...
+  </div>
+</ng-template>
+
+ </mat-tab>
+  <mat-tab label="My Applications"> <div class="p-6">
+
+  <h2 class="text-xl font-semibold mb-4">My Loan Applications</h2>
+
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="text-gray-500">
+    Loading loan applications...
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!isLoading && loanApplications.length"
+       class="overflow-x-auto bg-white shadow rounded-lg">
+
+    <table class="min-w-full text-sm text-left">
+      <thead class="bg-gray-100 text-gray-600 uppercase">
+        <tr>
+          <th class="px-6 py-3">Application ID</th>
+          <th class="px-6 py-3">Loan Type</th>
+          <th class="px-6 py-3">Amount</th>
+          <th class="px-6 py-3">Tenure</th>
+          <th class="px-6 py-3">EMI</th>
+          <th class="px-6 py-3">Status</th>
+          <th class="px-6 py-3">Applied At</th>
+          <th class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let loan of loanApplications" class="border-b">
+          <td class="px-6 py-4">{{ loan.applicationId }}</td>
+          <td class="px-6 py-4">{{ loan.loanType }}</td>
+          <td class="px-6 py-4">₹{{ loan.requestedAmount | number }}</td>
+          <td class="px-6 py-4">{{ loan.tenureMonths }}</td>
+          <td class="px-6 py-4">₹{{ loan.calculatedEmi | number:'1.2-2' }}</td>
+          <td class="px-6 py-4">
+            {{ loan.applicationStatus }}
+          </td>
+          <td class="px-6 py-4">
+            {{ loan.appliedAt | date:'dd MMM yyyy, hh:mm a' }}
+          </td>
+          <td>
+            
+            <button matButton="elevated" *ngIf="loan.applicationStatus==='LOAN_APPROVED'" (click)="openSanctionLetter(loan.applicationId)">SancationLetter</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!isLoading && !loanApplications.length"
+       class="text-gray-500">
+    No records found.
+  </div>
+
+</div>
+ </mat-tab>
+</mat-tab-group>
+    
+
+</section>

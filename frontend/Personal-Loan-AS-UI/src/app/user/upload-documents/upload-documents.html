@@ -1,0 +1,43 @@
+<h2 class="text-2xl font-bold mb-6">
+    Upload Documents — {{ loanId }}
+</h2>
+
+<div class="bg-white rounded-xl shadow p-6">
+    <table class="w-full">
+        <thead class="border-b">
+            <tr>
+                <th class="text-left py-2">Document</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let doc of documents" class="border-b">
+                <td class="py-3">{{ doc.name }}</td>
+
+                <td>
+                    <span class="px-2 py-1 rounded text-sm" [ngClass]="{
+              'bg-gray-200 text-gray-700': doc.status === 'NOT_UPLOADED',
+              'bg-yellow-100 text-yellow-700': doc.status === 'UPLOADED',
+              'bg-green-100 text-green-700': doc.status === 'APPROVED',
+              'bg-red-100 text-red-700': doc.status === 'REJECTED'
+            }">
+                        {{ doc.status.replace('_', ' ') }}
+                    </span>
+                </td>
+
+                <td>
+                    <label *ngIf="doc.status !== 'APPROVED'" class="cursor-pointer text-blue-600 hover:underline">
+                        Upload
+                        <input type="file" hidden (change)="onFileSelect($event, doc)" />
+                    </label>
+
+                    <span *ngIf="doc.status === 'APPROVED'" class="text-gray-400">
+                        Verified
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

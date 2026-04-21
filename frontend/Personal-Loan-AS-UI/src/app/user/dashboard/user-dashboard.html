@@ -1,0 +1,206 @@
+<app-header></app-header>
+
+<!-- <section class="min-h-screen bg-slate-100 px-8 py-10 space-y-12"> -->
+    <section
+class="relative min-h-screen px-8 py-10 space-y-12
+         bg-cover bg-center bg-no-repeat"
+  style="background-image: url('assets/images/backgroundImage.jpg');"
+>
+
+    <!-- ================= HEADER ================= -->
+    <header class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div>
+            <h1 class="text-3xl font-semibold text-slate-900 tracking-tight">
+                Welcome To Personal Loan 👋
+            </h1>
+            <p class="text-slate-500 mt-1">
+                Track and manage your personal loan journey
+            </p>
+        </div>
+    </header>
+    <!-- ================= QUICK ACTIONS ================= -->
+    <div class="grid md:grid-cols-4 gap-6">
+
+        <!-- APPLY LOAN (FIXED) -->
+        <button (click)="applyLoan()" [disabled]="checkingApply" class="group relative overflow-hidden text-left
+             bg-white border border-slate-200
+             rounded-2xl p-6
+             transition-all duration-300
+             hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-300
+             disabled:opacity-60 disabled:cursor-not-allowed">
+
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition
+                  bg-gradient-to-br from-indigo-50 via-transparent to-transparent"></div>
+
+            <p class="relative text-xs uppercase tracking-wide text-slate-500">
+                New Application
+            </p>
+
+            <h3 class="relative mt-2 text-lg font-semibold text-slate-900
+                 group-hover:text-indigo-600 transition">
+                {{ checkingApply ? 'Checking Eligibility...' : 'Apply for Loan' }}
+            </h3>
+
+            <p class="relative mt-1 text-sm text-slate-500">
+                Start a fresh loan request
+            </p>
+        </button>
+
+        <!-- MY LOANS -->
+        <a routerLink="/user/my-loans" class="group relative overflow-hidden
+              bg-white border border-slate-200
+              rounded-2xl p-6
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-300">
+
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition
+                  bg-gradient-to-br from-indigo-50 via-transparent to-transparent"></div>
+
+            <p class="relative text-xs uppercase tracking-wide text-slate-500">
+                Overview
+            </p>
+
+            <h3 class="relative mt-2 text-lg font-semibold text-slate-900
+                 group-hover:text-indigo-600 transition">
+                My Loans
+            </h3>
+
+            <p class="relative mt-1 text-sm text-slate-500">
+                View active & past loans
+            </p>
+        </a>
+
+        <!-- EMI SCHEDULE -->
+        <a routerLink="/user/emi-schedule" class="group relative overflow-hidden
+              bg-white border border-slate-200
+              rounded-2xl p-6
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-300">
+
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition
+                  bg-gradient-to-br from-indigo-50 via-transparent to-transparent"></div>
+
+            <p class="relative text-xs uppercase tracking-wide text-slate-500">
+                Payments
+            </p>
+
+            <h3 class="relative mt-2 text-lg font-semibold text-slate-900
+                 group-hover:text-indigo-600 transition">
+                EMI Schedule
+            </h3>
+
+            <p class="relative mt-1 text-sm text-slate-500">
+                Monthly breakdown
+            </p>
+        </a>
+
+        <!-- PROFILE -->
+        <a routerLink="/user/profile" class="group relative overflow-hidden
+              bg-white border border-slate-200
+              rounded-2xl p-6
+              transition-all duration-300
+              hover:-translate-y-1 hover:shadow-2xl hover:border-indigo-300">
+
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition
+                  bg-gradient-to-br from-indigo-50 via-transparent to-transparent"></div>
+
+            <p class="relative text-xs uppercase tracking-wide text-slate-500">
+                Account
+            </p>
+
+            <h3 class="relative mt-2 text-lg font-semibold text-slate-900
+                 group-hover:text-indigo-600 transition">
+                Profile
+            </h3>
+
+            <p class="relative mt-1 text-sm text-slate-500">
+                Personal & KYC info
+            </p>
+        </a>
+    </div>
+<!-- 🔥 FLOATING AUTO SLIDER -->
+<div class="floating-container">
+
+  <div class="banner-wrapper" (click)="nextSlide()">
+
+    <div
+      class="banner-track"
+      [class.no-transition]="disableTransition"
+      [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+      (transitionend)="onTransitionEnd()"
+    >
+      <div class="banner" *ngFor="let banner of infiniteBanners">
+        <img
+          [ngSrc]="banner"
+          width="914"
+          height="440"
+          alt="banner"
+        />
+      </div>
+    </div>
+
+    <!-- DOTS -->
+    <div class="dots" (click)="$event.stopPropagation()">
+      <span
+        *ngFor="let _ of banners; let i = index"
+        [class.active]="i === realIndex"
+        (click)="goToSlide(i)"
+      ></span>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+    <!-- ================= CURRENT STATUS ================= -->
+    <div class="relative overflow-hidden
+              bg-white border border-slate-200
+              rounded-3xl p-8
+              shadow-sm">
+
+        <div class="absolute inset-x-0 top-0 h-1
+                bg-gradient-to-r from-indigo-500 via-indigo-600 to-slate-900"></div>
+
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+                <p class="text-xs uppercase tracking-widest text-slate-500 mb-2">
+                    Current Loan Status
+                </p>
+                <h2 class="text-2xl font-semibold text-slate-900">
+                    {{ currentStatusLabel }}
+                </h2>
+                <p class="mt-2 text-slate-500 max-w-xl">
+                    {{ statusDescription }}
+                </p>
+            </div>
+
+        <div *ngIf="primaryActionLabel">
+  <button
+    [routerLink]="['/user/loan-stepper2']"
+    [queryParams]="{ step: 3 }"
+    class="px-7 py-3 rounded-xl
+           bg-slate-900 text-white
+           font-medium
+           hover:bg-black transition
+           shadow-lg
+           hover:cursor-pointer">
+    {{ primaryActionLabel }}
+  </button>
+</div>
+   
+        </div>
+    </div>
+
+    <!-- ================= TIMELINE ================= -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-600 mb-6">
+            Application Progress
+        </h3>
+
+        <app-application-timeline [currentStage]="currentStage">
+        </app-application-timeline>
+    </div>
+
+</section>

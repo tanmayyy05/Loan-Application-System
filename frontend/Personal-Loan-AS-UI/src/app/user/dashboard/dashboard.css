@@ -1,0 +1,63 @@
+.floating-container {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Slider */
+.banner-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+
+.banner-track {
+  display: flex;
+  transition: transform 0.25s linear;
+  will-change: transform;
+}
+
+.banner-track.no-transition {
+  transition: none !important;
+}
+
+.banner {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Dots */
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dots span {
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dots span.active {
+  background: #1e40af;
+}
+
+/* Float animation */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}

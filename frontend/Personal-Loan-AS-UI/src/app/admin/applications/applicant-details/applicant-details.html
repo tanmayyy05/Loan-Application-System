@@ -1,0 +1,74 @@
+<section class="max-w-[1400px] mx-auto px-6 py-10 space-y-8">
+
+    <!-- HEADER -->
+    <div class="bg-white rounded-3xl shadow-xl border p-8">
+        <h1 class="text-3xl font-bold">Application Details</h1>
+        <p class="text-sm text-slate-500 mt-1">
+            Application ID —
+            <span class="font-medium">
+                {{ application?.applicationId || '—' }}
+            </span>
+        </p>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-2xl border p-6">
+            <p class="text-xs uppercase text-slate-500">Applicant</p>
+            <p class="text-lg font-semibold">
+                {{ application?.user?.fullName || '—' }}
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border p-6">
+            <p class="text-xs uppercase text-slate-500">Loan Amount</p>
+            <p class="text-lg font-semibold">
+                ₹{{ application?.requestedAmount || '—' }}
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border p-6">
+            <p class="text-xs uppercase text-slate-500">Tenure</p>
+            <p class="text-lg font-semibold">
+                {{ application?.tenureMonths || '—' }}
+            </p>
+        </div>
+
+        <div class="bg-white rounded-2xl border p-6">
+            <p class="text-xs uppercase text-slate-500">Calculated EMI</p>
+            <p class="text-lg font-semibold">
+                {{ application?.calculatedEmi || '—' }}
+            </p>
+        </div>
+    </div>
+
+    <!-- DOCUMENTS -->
+    <div class="bg-white rounded-3xl shadow-xl p-10">
+        <h2 class="text-3xl font-semibold mb-8">Documents</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div *ngFor="let doc of documents" class="border rounded-2xl p-6 space-y-4">
+                <h4 class="font-semibold">
+                    {{ doc.documentType.replace('_',' ') }}
+                </h4>
+
+                <button class="text-indigo-600" [disabled]="doc.status === 'NOT_UPLOADED'" (click)="viewDocument(doc)">
+                    View
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="bg-white rounded-3xl border shadow p-6 flex justify-end gap-4">
+        <button class="px-6 py-3 rounded-xl bg-green-600 text-white" (click)="approveApplication()">
+            Approve
+        </button>
+
+        <button class="px-6 py-3 rounded-xl bg-red-600 text-white" (click)="rejectApplication()">
+            Reject
+        </button>
+    </div>
+
+</section>

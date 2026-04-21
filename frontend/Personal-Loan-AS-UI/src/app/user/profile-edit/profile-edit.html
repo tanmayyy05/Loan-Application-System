@@ -1,0 +1,69 @@
+<section class="p-8 bg-slate-100 min-h-screen max-w-xl mx-auto">
+
+  <h1 class="text-2xl font-bold mb-6">Edit Profile</h1>
+
+  <div class="bg-white p-6 rounded-xl shadow space-y-4">
+
+    <label class="block">
+      Full Name
+      <input type="text" [(ngModel)]="profile.fullName" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Email
+      <input type="email" [(ngModel)]="profile.email" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Phone
+      <input type="text" [(ngModel)]="profile.mobileNumber" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Address
+      <textarea [(ngModel)]="profile.address" class="input w-full mt-1"></textarea>
+    </label>
+
+    <label class="block">
+      Age
+      <input type="number" [(ngModel)]="profile.age" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Monthly Income
+      <input type="number" [(ngModel)]="profile.monthlyIncome" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Employment Type
+      <input type="text" [(ngModel)]="profile.employmentType" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      City
+      <input type="text" [(ngModel)]="profile.city" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      State
+      <input type="text" [(ngModel)]="profile.state" class="input w-full mt-1" />
+    </label>
+
+    <label class="block">
+      Pincode
+      <input type="text" [(ngModel)]="profile.pincode" class="input w-full mt-1" />
+    </label>
+
+    <div class="flex justify-end gap-3 pt-4">
+      <a routerLink="/user/profile" class="px-4 py-2 border rounded">
+        Cancel
+      </a>
+
+      <button (click)="saveProfile()" class="bg-indigo-600 text-white px-4 py-2 rounded">
+        Save Changes
+      </button>
+    </div>
+
+  </div>
+
+</section>

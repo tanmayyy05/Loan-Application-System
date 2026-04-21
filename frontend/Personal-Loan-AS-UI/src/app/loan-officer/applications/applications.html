@@ -1,0 +1,82 @@
+<section class="p-8 bg-slate-100 min-h-screen">
+
+    <!-- TABLE CONTAINER -->
+    <div class="bg-white border border-slate-200 rounded-xl overflow-x-auto shadow-sm">
+
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr class="text-left text-slate-600 font-medium">
+                    <th class="px-6 py-3">Application ID</th>
+                    <th class="px-6 py-3">Applicant</th>
+                    <th class="px-6 py-3">Loan Amount</th>
+                    <th class="px-6 py-3">Current Stage</th>
+                    <th class="px-6 py-3 text-right">Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <ng-container *ngIf="paginatedApplications$ | async as applications">
+
+                    <tr *ngFor="let app of applications" class="border-b border-slate-100 hover:bg-slate-50 transition">
+
+                        <!-- APPLICATION ID -->
+                        <td class="px-6 py-4 font-medium text-slate-700">
+                            {{ app.applicationId }}
+                        </td>
+
+                        <!-- APPLICANT -->
+                        <td class="px-6 py-4 text-slate-800">
+                            {{ app.applicantName || app.user?.fullName }}
+                        </td>
+
+                        <!-- AMOUNT -->
+                        <td class="px-6 py-4 text-slate-700">
+                            ₹{{ app.requestedAmount | number }}
+                        </td>
+
+                        <!-- STATUS -->
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium"
+                                [ngClass]="{
+                  'bg-yellow-100 text-yellow-800': app.applicationStatus === 'DOCUMENT_VERIFICATION_PENDING',
+                  'bg-blue-100 text-blue-700': app.applicationStatus === 'UNDER_REVIEW',
+                  'bg-emerald-100 text-emerald-700': app.applicationStatus === 'APPROVED',
+                  'bg-rose-100 text-rose-700': app.applicationStatus === 'REJECTED'
+                }">
+                                {{ app.applicationStatus }}
+                            </span>
+                        </td>
+
+                        <!-- ACTION -->
+                        <td class="px-6 py-4 text-right">
+                            <a [routerLink]="getReviewLink(app)"
+                                class="inline-flex items-center gap-1 text-indigo-600 font-medium hover:text-indigo-700 transition">
+                                {{ isAdminView ? 'View' : 'Review' }}
+                                <span class="text-xs">→</span>
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    <!-- EMPTY STATE -->
+                    <tr *ngIf="applications.length === 0">
+                        <td colspan="5" class="text-center py-10 text-slate-400">
+                            No applications found
+                        </td>
+                    </tr>
+
+                </ng-container>
+            </tbody>
+        </table>
+
+<mat-paginator
+  [length]="totalItems"
+  [pageSize]="pageSize$ | async"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)"
+  showFirstLastButtons>
+</mat-paginator>
+
+
+    </div>
+</section>

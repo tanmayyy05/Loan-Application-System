@@ -1,0 +1,81 @@
+<header
+  class="relative w-full shadow-md py-4 flex items-center justify-between
+         bg-cover bg-center"
+  style="background-image: url('assets/images/headerimage.jpg');"
+>
+  
+
+  <!-- Header content -->
+  <div class="relative z-10 w-full flex items-center justify-between">
+    <!-- Left -->
+    <div class="ml-6 text-xl font-bold text-white">
+      Loan Management System
+    </div>
+
+    <!-- Right -->
+    <div class="flex items-center gap-6 mr-6">
+      <div class="text-right">
+        <p class="text-sm text-white">Welcome</p>
+        <p class="text-lg font-semibold text-white ">
+          {{ user?.fullName }}
+        </p>
+        <span class="text-xs px-2 py-1 bg-indigo-100 text-indigo-600 rounded">
+          {{ user?.role }}
+        </span>
+      </div>
+
+      <ng-container *ngIf="user?.role === 'ADMIN'; else userRoleUser">
+        <img  *ngIf="user?.gender === 'Male'" src="assets/images/man.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+         <img  *ngIf="user?.gender === 'Female'" src="assets/images/female-avatar.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+      </ng-container>
+
+      <ng-template #userRoleUser>
+        <ng-container *ngIf="user?.role === 'USER'; else userRoleLoan">
+          <img  *ngIf="user?.gender === 'Male'" src="assets/images/man-avatar.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+         <img  *ngIf="user?.gender === 'Female' " src="assets/images/female-loan.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+        </ng-container>
+      </ng-template>
+
+      <ng-template #userRoleLoan>
+  <img  *ngIf="user?.gender === 'Male'" src="assets/images/loan-officer.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+         <img  *ngIf="user?.gender === 'Female' " src="assets/images/female-loan.jpg"
+               class="w-15 h-15 rounded-full 
+         transition-transform transition-shadow transition-ring
+         duration-300 ease-in-out
+         hover:scale-105 hover:shadow-lg" />
+      </ng-template>
+
+      <button
+        (click)="logout()"
+        class="inline-flex items-center justify-center
+               px-6 py-2.5 rounded-xl
+               text-sm font-medium
+               text-red-500
+               border border-red-200
+               hover:bg-red-50 hover:text-red-600
+               transition">
+        Logout
+      </button>
+    </div>
+  </div>
+</header>

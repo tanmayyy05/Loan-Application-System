@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<!-- <div class="flex bg-slate-100 min-h-screen overflow-x-hidden"> -->
+       <div
+class="relative min-h-screen px-8 py-10 space-y-12 flex
+         bg-cover bg-center bg-no-repeat"
+  style="background-image: url('assets/images/backgroundImage.jpg');"
+>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="w-[260px] ml-6 h-fit self-start  mb-0 rounded-3xl
+               bg-white
+               shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)]
+               flex flex-col">
+
+        <!-- BRAND / ROLE -->
+        <div class="px-6 pt-6 pb-5 border-b border-slate-200/70">
+            <div class="flex items-center gap-4">
+                <div class="w-11 h-11 rounded-full
+                           bg-gradient-to-br from-indigo-600 to-indigo-800
+                           flex items-center justify-center
+                           text-white font-semibold
+                           shadow-sm">
+                    A
+                </div>
+
+                <div class="leading-tight">
+                    <p class="text-sm font-semibold text-slate-900">
+                        CrediFlow
+                    </p>
+                    <p class="text-[11px] text-indigo-600 tracking-wide font-medium mt-[2px]">
+                        ADMIN PANEL
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAV -->
+        <nav class="px-4 py-2 flex flex-col space-y-1.5
+">
+
+            <a routerLink="/admin/dashboard" routerLinkActive="nav-active" class="cred-nav">
+                Dashboard
+            </a>
+
+            <a routerLink="/admin/applications" routerLinkActive="nav-active" class="cred-nav">
+                Applications
+            </a>
+
+            <a routerLink="/admin/disbursements" routerLinkActive="nav-active" class="cred-nav">
+                Disbursements
+            </a>
+
+            <a routerLink="/admin/system-rules" routerLinkActive="nav-active" class="cred-nav">
+                System Rules
+            </a>
+
+            <a routerLink="/admin/audit-logs" routerLinkActive="nav-active" class="cred-nav">
+                Audit Logs
+            </a>
+
+            <a routerLink="/admin/loan-officers" routerLinkActive="nav-active" class="cred-nav">
+                Loan Officers
+            </a>
+
+            <!-- LOGOUT -->
+            <div class="pt-3 mt-2 border-t border-slate-200/70">
+                <a routerLink="/" class="flex items-center justify-center h-11 rounded-xl
+                          text-sm font-medium
+                          text-red-500
+                          hover:bg-red-50
+                          transition">
+                    Logout
+                </a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 px-6 ">
+        <router-outlet></router-outlet>
+    </main>
+
+</div>

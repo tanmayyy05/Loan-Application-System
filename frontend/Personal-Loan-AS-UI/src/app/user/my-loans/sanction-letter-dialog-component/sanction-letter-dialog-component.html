@@ -1,0 +1,58 @@
+
+<!-- Congratulations Header -->
+<div class="congrats-header">
+  <div class="icon-wrapper">
+    <mat-icon class="success-icon">celebration</mat-icon>
+  </div>
+
+  <h2 class="congrats-title">Congratulations! 🎉</h2>
+  <p class="congrats-subtitle">
+    Your loan has been successfully sanctioned
+  </p>
+</div>
+
+<h2 mat-dialog-title class="dialog-title">Sanction Letter</h2>
+
+<div mat-dialog-content class="dialog-content" *ngIf="!isLoading; else loading">
+
+  <div class="info-row">
+    <span>Loan Amount</span>
+    <strong>₹{{ sanctionLetter.approvedAmount | number }}</strong>
+  </div>
+
+  <div class="info-row">
+    <span>Interest Rate</span>
+    <strong>{{ sanctionLetter.interestRate }}%</strong>
+  </div>
+
+  <div class="info-row">
+    <span>Tenure</span>
+    <strong>{{ sanctionLetter.tenureMonths }} months</strong>
+  </div>
+
+  <div class="info-row highlight">
+    <span>EMI</span>
+    <strong>₹{{ sanctionLetter.emiAmount | number:'1.2-2' }}</strong>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading sanction letter...</div>
+</ng-template>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="closeDialog()">Close</button>
+
+  <button mat-raised-button color="warn"
+          [disabled]="actionInProgress"
+          (click)="reject()">
+    Reject
+  </button>
+
+  <button mat-raised-button color="primary"
+          [disabled]="actionInProgress"
+          (click)="accept()">
+    Accept
+  </button>
+</div>

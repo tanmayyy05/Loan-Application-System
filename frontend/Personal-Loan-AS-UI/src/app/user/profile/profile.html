@@ -1,0 +1,150 @@
+<section class="min-h-screen bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 p-8">
+
+    <!-- LOADING -->
+    <p *ngIf="loading" class="text-slate-500 text-center text-lg">
+        Loading profile...
+    </p>
+
+    <!-- ERROR -->
+    <p *ngIf="error" class="text-red-600 text-center font-medium">
+        {{ error }}
+    </p>
+
+    <!-- PROFILE -->
+    <ng-container *ngIf="!loading && user">
+
+        <!-- ================= HEADER ================= -->
+        <div class="mb-10 flex items-center gap-8">
+
+            <!-- AVATAR -->
+            <div class="relative w-24 h-24 rounded-full
+                       bg-gradient-to-br from-indigo-500 to-indigo-700
+                       flex items-center justify-center
+                       text-white text-3xl font-bold
+                       shadow-lg shadow-indigo-500/30">
+
+                {{ getInitials(user.fullName) }}
+
+                <span class="absolute inset-0 rounded-full ring-4 ring-indigo-500/20"></span>
+            </div>
+
+            <!-- NAME -->
+            <div>
+                <h1 class="text-3xl font-semibold text-slate-900">
+                    {{ user.fullName }}
+                </h1>
+
+                <p class="text-slate-500 mt-1">
+                    {{ user.role }}
+                </p>
+
+                <span class="inline-flex items-center gap-2 mt-3 px-4 py-1.5 rounded-full text-sm font-medium
+                           bg-emerald-100 text-emerald-700">
+                    ✔ Verified Account
+                </span>
+            </div>
+        </div>
+
+        <!-- ================= MAIN GRID ================= -->
+        <div class="grid lg:grid-cols-2 gap-8">
+
+            <!-- PERSONAL INFO -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-lg">
+
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-slate-900">
+                        Personal Information
+                    </h3>
+
+                    <button routerLink="/user/profile-edit"
+                        class="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                        Edit
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 text-sm">
+
+                    <div>
+                        <p class="text-slate-500">Full Name</p>
+                        <p class="mt-1 font-medium">{{ user.fullName }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">Email</p>
+                        <p class="mt-1 font-medium">{{ user.email }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">Phone</p>
+                        <p class="mt-1 font-medium">{{ user.mobileNumber }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">Date of Birth</p>
+                        <p class="mt-1 font-medium">{{ user.dateOfBirth | date }}</p>
+                    </div>
+
+                    <div class="col-span-2">
+                        <p class="text-slate-500">Address</p>
+                        <p class="mt-1 font-medium">
+                            {{ user.address }}, {{ user.city }}, {{ user.state }} - {{ user.pincode }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMPLOYMENT INFO -->
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-lg">
+
+                <h3 class="text-lg font-semibold text-slate-900 mb-6">
+                    Employment & Financial
+                </h3>
+
+                <div class="grid grid-cols-2 gap-6 text-sm">
+
+                    <div>
+                        <p class="text-slate-500">Employment Type</p>
+                        <p class="mt-1 font-medium">{{ user.employmentType }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">Monthly Income</p>
+                        <p class="mt-1 font-medium">₹{{ user.monthlyIncome }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">Company</p>
+                        <p class="mt-1 font-medium">{{ user.companyName }}</p>
+                    </div>
+
+                    <div>
+                        <p class="text-slate-500">IFSC Code</p>
+                        <p class="mt-1 font-medium">{{ user.ifscCode }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ACCOUNT META -->
+        <div class="mt-10 max-w-xl bg-white rounded-3xl p-8 border border-slate-200 shadow-lg">
+
+            <h3 class="text-lg font-semibold mb-6">Account Details</h3>
+
+            <div class="grid grid-cols-2 gap-6 text-sm">
+                <div>
+                    <p class="text-slate-500">User ID</p>
+                    <p class="mt-1 font-medium">{{ user.id }}</p>
+                </div>
+
+                <div>
+                    <p class="text-slate-500">Gender</p>
+                    <p class="mt-1 font-medium">{{ user.gender }}</p>
+                </div>
+            </div>
+        </div>
+
+    </ng-container>
+
+</section>

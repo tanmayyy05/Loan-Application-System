@@ -1,0 +1,89 @@
+<section class="p-8 bg-slate-100 min-h-screen">
+
+    <!-- PAGE HEADER -->
+    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+        <div>
+            <h1 class="text-2xl font-semibold text-slate-800">
+                Decision History
+            </h1>
+            <p class="text-sm text-slate-500 mt-1">
+                Immutable audit trail of all loan approval decisions
+            </p>
+        </div>
+
+        <!-- INFO BADGE -->
+        <div class="mt-4 md:mt-0">
+            <span class="px-3 py-1 text-xs rounded-full bg-slate-200 text-slate-700">
+                Read-only
+            </span>
+        </div>
+    </div>
+
+    <!-- TABLE CONTAINER -->
+    <div class="bg-white border border-slate-200 rounded-xl overflow-x-auto shadow-sm">
+
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr class="text-left text-slate-600 font-medium">
+                    <th class="px-6 py-3">Application ID</th>
+                    <th class="px-6 py-3">Decision</th>
+                    <th class="px-6 py-3">Officer</th>
+                    <th class="px-6 py-3">Remarks</th>
+                    <th class="px-6 py-3">Decision Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let h of history" class="border-b border-slate-100 hover:bg-slate-50 transition">
+
+                    <!-- Application ID -->
+                    <td class="px-6 py-4 font-medium text-slate-700">
+                        {{ h.applicationId }}
+                    </td>
+
+                    <!-- Decision -->
+                    <td class="px-6 py-4">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium" [ngClass]="{
+                                'bg-emerald-100 text-emerald-700': h.action === 'APPROVED',
+                                'bg-rose-100 text-rose-700': h.action === 'REJECTED'
+                            }">
+                            {{ h.action }}
+                        </span>
+                    </td>
+
+                    <!-- Officer -->
+                    <td class="px-6 py-4 text-slate-700">
+                        {{ h.officer }}
+                    </td>
+
+                    <!-- Remarks -->
+                    <td class="px-6 py-4 text-slate-600 max-w-md">
+                        <span class="block truncate" title="{{ h.remarks }}">
+                            {{ h.remarks || '—' }}
+                        </span>
+                    </td>
+
+                    <!-- Date -->
+                    <td class="px-6 py-4 text-slate-600 whitespace-nowrap">
+                        {{ h.date | date:'dd MMM yyyy' }}
+                        <div class="text-xs text-slate-400">
+                            {{ h.date | date:'HH:mm' }}
+                        </div>
+                    </td>
+
+                </tr>
+
+                <!-- EMPTY STATE -->
+                <tr *ngIf="history.length === 0">
+                    <td colspan="5" class="px-6 py-12 text-center text-slate-400">
+                        No decision records available
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</section>

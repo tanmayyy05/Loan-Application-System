@@ -1,0 +1,81 @@
+<div class="h-[600px] flex">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="w-[260px] m-6 rounded-3xl
+               bg-white
+               border-slate-950
+               shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)]
+               flex flex-col">
+
+        <!-- USER / BRAND -->
+        <!-- USER / BRAND -->
+<div class="px-6 pt-6 pb-5 border-b border-slate-200/70">
+  <div class="flex items-center gap-4">
+
+    <div class="w-11 h-11 rounded-full
+            bg-gradient-to-br
+            flex items-center justify-center
+            text-white font-semibold
+            shadow-sm"
+     [ngClass]="avatarBgClass">
+  {{ userInitial }}
+</div>
+
+    <!-- Name -->
+    <div class="leading-tight">
+      <p class="text-sm font-semibold text-slate-900">
+        {{ userFullName }}
+      </p>
+
+      <p class="text-[11px] text-indigo-500 tracking-wide font-medium mt-[2px]">
+        LEVEL • {{ userLevel }}
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+        <!-- NAV -->
+        <nav class="flex-1 px-4 py-4 flex flex-col space-y-1.5">
+
+            <a routerLink="/user/dashboard"  routerLinkActive="nav-active" class="cred-nav">
+                Dashboard
+            </a>
+
+            <a (click)="applyLoan()" routerLinkActive="nav-active" class="cred-nav">
+                Apply Loan
+            </a>
+
+            <a routerLink="/user/my-loans" routerLinkActive="nav-active" class="cred-nav">
+                My Loans
+            </a>
+
+            <a routerLink="/user/emi-schedule" routerLinkActive="nav-active" class="cred-nav">
+                EMI Schedule
+            </a>
+
+            <a routerLink="/user/profile" routerLinkActive="nav-active" class="cred-nav">
+                Profile
+            </a>
+
+            <!-- LOGOUT -->
+            <div class="pt-3 mt-2 border-t border-slate-200/70">
+                <a routerLink="/" class="flex items-center justify-center h-11 rounded-xl
+                           text-sm font-medium
+                           text-red-500
+                           hover:bg-red-50
+                           transition">
+                    Logout
+                </a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <main class="flex-1 px-8 py-8 rounded-3xl">
+        <router-outlet></router-outlet>
+    </main>
+
+</div>

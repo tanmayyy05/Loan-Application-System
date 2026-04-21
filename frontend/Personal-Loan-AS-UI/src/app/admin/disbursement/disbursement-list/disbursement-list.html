@@ -1,0 +1,138 @@
+<section class="max-w-[1400px] mx-auto px-6 py-10 space-y-8">
+
+  <!-- ================= HEADER ================= -->
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
+    <h1 class="text-3xl font-bold text-slate-900">
+      Disbursement Authorization
+    </h1>
+    <p class="text-sm text-slate-500 mt-1">
+      Review and authorize approved loan disbursements
+    </p>
+  </div>
+
+  <div class="mb-4 flex items-center gap-4">
+    <label class="text-sm font-medium text-slate-600">Filter Status</label>
+
+    <select class="border border-slate-300 rounded px-3 py-2 text-sm" [(ngModel)]="selectedStatus"
+      (change)="onStatusChange()">
+
+      <option *ngFor="let status of statuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
+
+
+  <!-- ================= PENDING APPROVALS ================= -->
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="px-8 py-6 border-b border-slate-200 bg-slate-50
+                flex items-center justify-between">
+
+      <h2 class="text-lg font-semibold text-slate-800">
+       Admin Approvals
+      </h2>
+    </div>
+
+
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+
+        <thead class="text-left text-xs uppercase tracking-wide text-slate-500 bg-white">
+          <tr class="border-b border-slate-200">
+            <th class="px-8 py-4">Application ID</th>
+            <th class="px-8 py-4">Applicant</th>
+            <th class="px-8 py-4">Loan Type</th>
+            <th class="px-8 py-4">Amount</th>
+            <th class="px-8 py-4">Status</th>
+            <th class="px-8 py-4">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let app of applications" class="border-b border-slate-100 hover:bg-slate-50 transition">
+
+            <td class="px-8 py-4 font-medium text-slate-800">
+              {{ app.applicationId }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-700">
+              {{ app.applicantName }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-600">
+              {{ app.loanType }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-700">
+              ₹{{ app.requestedAmount | number }}
+            </td>
+
+            <td class="px-8 py-4">
+              <span class="px-2 py-1 rounded text-xs font-medium
+            bg-green-100 text-green-700">
+                {{ app.applicationStatus }}
+              </span>
+            </td>
+
+            <td class="px-8 py-4">
+  <button
+    class="px-4 py-2 rounded-lg text-xs font-semibold
+           bg-emerald-600 text-white
+           hover:bg-emerald-700 transition
+           disabled:bg-gray-300 disabled:cursor-not-allowed"
+    [disabled]="app.applicationStatus !== 'SANCTION_LETTER_ACCEPTED'"
+    (click)="openConfirm(app.applicationId)">
+    Disburse
+  </button>
+</td>
+
+
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ================= CONFIRM MODAL ================= -->
+  <div *ngIf="selectedId"
+       class="fixed inset-0 bg-black/50 backdrop-blur-sm
+              flex items-center justify-center z-50">
+
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8">
+
+      <h3 class="text-xl font-semibold text-slate-900 mb-2">
+        Confirm Disbursement
+      </h3>
+
+      <p class="text-slate-600 mb-8">
+        Are you sure you want to authorize disbursement for
+        <span class="font-medium text-slate-800">{{ selectedId }}</span>?
+      </p>
+
+      <div class="flex justify-end gap-4">
+        <button
+          class="px-5 py-2 rounded-xl text-slate-700
+                 hover:bg-slate-100 transition"
+          (click)="cancel()">
+          Cancel
+        </button>
+
+        <button
+          class="px-5 py-2 rounded-xl
+                 bg-emerald-600 text-white font-semibold
+                 hover:bg-emerald-700 transition"
+          (click)="confirm()">
+          Confirm Authorization
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</section>

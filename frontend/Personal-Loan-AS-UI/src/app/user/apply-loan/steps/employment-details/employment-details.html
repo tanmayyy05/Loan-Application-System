@@ -1,0 +1,17 @@
+<div class="bg-white p-8 rounded-2xl shadow max-w-xl mx-auto">
+    <h2 class="text-2xl font-semibold mb-6">Employment Details</h2>
+
+    <form [formGroup]="form" class="space-y-4">
+        <input class="input" placeholder="Employer Name" formControlName="employer" />
+        <input class="input" type="number" placeholder="Monthly Income" formControlName="monthlyIncome" />
+
+        <select class="input" formControlName="employmentType">
+            <option value="SALARIED">Salaried</option>
+            <option value="SELF_EMPLOYED">Self Employed</option>
+        </select>
+
+        <div class="flex justify-end">
+            <button class="btn-primary" (click)="next()">Continue</button>
+        </div>
+    </form>
+</div>

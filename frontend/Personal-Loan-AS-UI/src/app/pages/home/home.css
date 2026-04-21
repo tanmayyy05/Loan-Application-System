@@ -1,0 +1,67 @@
+/* Floating animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes floatHorizontal {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-20px);
+    }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-horizontal {
+    animation: floatHorizontal 3s ease-in-out infinite;
+}
+
+/* Fade-in effect */
+.fade-in {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Optional smooth hover for all cards/buttons */
+.card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    transition: all 0.3s ease-in-out;
+}
+
+.hero-title span {
+    animation: fadeUp 0.7s ease-out both;
+}
+
+.hero-title span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.hero-desc {
+    animation: fadeUp 0.8s ease-out 0.2s both;
+}

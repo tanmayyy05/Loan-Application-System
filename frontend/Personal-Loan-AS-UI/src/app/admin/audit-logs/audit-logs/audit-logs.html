@@ -1,0 +1,72 @@
+<section class="max-w-[1400px] mx-auto px-6 py-10 space-y-8">
+
+    <!-- ================= HEADER ================= -->
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
+        <h1 class="text-3xl font-bold text-slate-900">
+            Audit Logs
+        </h1>
+        <p class="text-slate-500 mt-2 max-w-3xl">
+            Track all critical actions performed across the system for transparency,
+            accountability, and compliance monitoring.
+        </p>
+    </div>
+
+    <!-- ================= TABLE CARD ================= -->
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+
+        <!-- TABLE STRIP -->
+        <div class="px-8 py-5 border-b border-slate-200 bg-slate-50">
+            <p class="text-sm font-semibold text-slate-700">
+                System Activity Records
+            </p>
+        </div>
+
+        <!-- TABLE -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+
+                <thead>
+                    <tr class="border-b border-slate-200 text-left">
+                        <th class="px-8 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            User
+                        </th>
+                        <th class="px-8 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            Action
+                        </th>
+                        <th class="px-8 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            Target
+                        </th>
+                        <th class="px-8 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                            Date & Time
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let log of logs" class="border-t border-slate-100 hover:bg-slate-50 transition">
+
+                        <td class="px-8 py-4 font-medium text-slate-800">
+                            {{ log.user }}
+                        </td>
+
+                        <td class="px-8 py-4 text-slate-700">
+                            {{ log.action }}
+                        </td>
+
+                        <td class="px-8 py-4 text-slate-600">
+                            {{ log.target }}
+                        </td>
+
+                        <td class="px-8 py-4 text-slate-500 whitespace-nowrap">
+                            {{ log.date }}
+                        </td>
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</section>

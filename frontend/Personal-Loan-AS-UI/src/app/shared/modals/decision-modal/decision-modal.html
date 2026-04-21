@@ -1,0 +1,23 @@
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-xl w-96">
+        <h2 class="text-xl font-bold mb-4">
+            {{ action === 'APPROVE' ? 'Approve' : 'Reject' }} Application
+        </h2>
+
+        <textarea class="w-full border p-3 rounded-lg mb-4" placeholder="Add remarks..."></textarea>
+
+        <div class="flex justify-end gap-3">
+            <button (click)="close.emit()" class="px-4 py-2 border rounded-lg">
+                Cancel
+            </button>
+
+            <button (click)="confirm.emit()" class="px-4 py-2 text-white rounded-lg" [ngClass]="{
+    'bg-green-600': action === 'APPROVE',
+    'bg-red-600': action === 'REJECT'
+  }">
+                Confirm
+            </button>
+
+        </div>
+    </div>
+</div>

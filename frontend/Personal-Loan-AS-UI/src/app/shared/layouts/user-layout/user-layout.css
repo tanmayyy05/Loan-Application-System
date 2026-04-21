@@ -1,0 +1,32 @@
+.cred-nav {
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #334155;
+    /* slate-700 */
+
+    background: #f8fafc;
+    /* slate-50 */
+    border: 1px solid #e2e8f0;
+
+    transition: all 0.25s ease;
+}
+
+.cred-nav:hover {
+    background: #4338ca;
+    /* indigo-50 */
+    color: #fff;
+    border-color: #c7d2fe;
+}
+
+.nav-active {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    color: white !important;
+    border-color: transparent;
+    box-shadow: 0 12px 30px -12px rgba(79, 70, 229, 0.6);
+}

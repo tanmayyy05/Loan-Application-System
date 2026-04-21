@@ -1,0 +1,163 @@
+<section class="max-w-[1400px] mx-auto px-6 py-10 space-y-12">
+
+  <!-- ================= KPI CARDS ================= -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+  <div *ngFor="let stat of stats"
+       
+       class="group bg-white rounded-3xl p-7 border border-slate-200
+              shadow-lg hover:shadow-xl
+              cursor-pointer transition-all duration-300">
+
+    <!-- LABEL -->
+    <p class="text-sm font-medium text-slate-500">
+      {{ stat.label }}
+    </p>
+
+    <!-- VALUE -->
+    <p class="text-4xl font-bold mt-3" [ngClass]="stat.color">
+      {{ stat.value }}
+    </p>
+
+    <!-- SUB TEXT -->
+    <p class="text-xs text-slate-400 mt-2">
+      {{ stat.sub }}
+    </p>
+
+    <!-- HOVER ACCENT -->
+    <div class="mt-4 h-1 w-10 bg-indigo-600 rounded-full
+                opacity-0 group-hover:opacity-100 transition">
+    </div>
+
+  </div>
+
+</div>
+
+
+  <div class="mb-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+  <label class="text-sm font-medium text-slate-600 whitespace-nowrap">
+    Filter Status
+  </label>
+
+  <select
+    class="w-full sm:w-[260px]
+           border border-slate-300 rounded
+           px-3 py-2 text-sm
+           focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    [(ngModel)]="selectedStatus"
+    (change)="onStatusChange()">
+
+    <option *ngFor="let status of statuses" [value]="status">
+      {{ status }}
+    </option>
+  </select>
+</div>
+
+
+
+  <!-- ================= PENDING APPROVALS ================= -->
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+
+    <!-- HEADER -->
+    <div class="px-8 py-6 border-b border-slate-200 bg-slate-50
+                flex items-center justify-between">
+
+      <h2 class="text-lg font-semibold text-slate-800">
+        Pending Admin Approvals
+      </h2>
+
+      <a routerLink="/admin/applications" class="text-sm font-medium text-indigo-600 hover:underline">
+        View loan officer dashboard
+      </a>
+    </div>
+
+
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+
+        <thead class="text-left text-xs uppercase tracking-wide text-slate-500 bg-white">
+          <tr class="border-b border-slate-200">
+            <th class="px-8 py-4">Application ID</th>
+            <th class="px-8 py-4">Applicant</th>
+            <th class="px-8 py-4">Loan Type</th>
+            <th class="px-8 py-4">Amount</th>
+            <th class="px-8 py-4">Status</th>
+            <th class="px-8 py-4">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let app of applications" class="border-b border-slate-100 hover:bg-slate-50 transition">
+
+            <td class="px-8 py-4 font-medium text-slate-800">
+              {{ app.applicationId }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-700">
+              {{ app.applicantName }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-600">
+              {{ app.loanType }}
+            </td>
+
+            <td class="px-8 py-4 text-slate-700">
+              ₹{{ app.requestedAmount | number }}
+            </td>
+
+            <td class="px-8 py-4">
+              <span class="px-2 py-1 rounded text-xs font-medium
+            bg-green-100 text-green-700">
+                {{ app.applicationStatus }}
+              </span>
+            </td>
+
+            <td class="px-8 py-4">
+              <button [disabled]="app.applicationStatus === 'SANCTION_LETTER_ACCEPTED'"
+                [routerLink]="['/admin/applications', app.applicationId]"
+                class="text-indigo-600 hover:underline text-sm font-medium disabled:text-gray-400">
+                Review →
+              </button>
+            </td>
+
+
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ================= RECENT ACTIVITY ================= -->
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-200">
+
+    <!-- HEADER -->
+    <div class="px-8 py-6 border-b border-slate-200 bg-slate-50">
+      <h2 class="text-lg font-semibold text-slate-800">
+        Recent Activity
+      </h2>
+    </div>
+
+    <!-- LIST -->
+    <ul class="divide-y divide-slate-100">
+
+      <li *ngFor="let act of activities" class="px-8 py-4 flex items-center justify-between
+                 hover:bg-slate-50 transition">
+
+        <span class="text-sm text-slate-700">
+          {{ act.text }}
+        </span>
+
+        <span class="text-xs text-slate-400 whitespace-nowrap">
+          {{ act.time }}
+        </span>
+
+      </li>
+
+    </ul>
+  </div>
+
+</section>

@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>
+  {{ isEdit ? 'Edit Loan Officer' : 'Add Loan Officer' }}
+</h2>
+
+<form [formGroup]="form" class="dialog-form">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Full Name</mat-label>
+    <input matInput formControlName="fullName">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Mobile Number</mat-label>
+    <input matInput formControlName="mobileNumber">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date of Birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Gender</mat-label>
+    <mat-select formControlName="gender">
+      <mat-option value="Male">Male</mat-option>
+      <mat-option value="Female">Female</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="address">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>City</mat-label>
+    <input matInput formControlName="city">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>State</mat-label>
+    <input matInput formControlName="state">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Pincode</mat-label>
+    <input matInput formControlName="pincode">
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="form.invalid">
+      {{ isEdit ? 'Update' : 'Save' }}
+    </button>
+  </div>
+
+</form>

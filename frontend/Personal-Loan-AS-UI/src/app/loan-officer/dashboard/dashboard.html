@@ -1,0 +1,75 @@
+<section class="p-8 space-y-8">
+
+    <h1 class="text-2xl font-bold">Loan Officer Dashboard abc</h1>
+
+    <!-- KPI CARDS -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+  <div *ngFor="let s of stats"
+       class="group relative overflow-hidden
+              bg-white p-6 rounded-2xl
+              shadow-md hover:shadow-2xl
+              transition-all duration-500 ease-in-out
+              hover:-translate-y-1">
+
+    <!-- Hover Gradient Bar -->
+    <div class="absolute bottom-0 left-0 h-1 w-full
+                scale-x-0 group-hover:scale-x-100
+                transition-transform duration-500 ease-in-out
+                origin-left rounded-full"
+         [ngClass]="s.bar">
+    </div>
+
+    <!-- Soft Glow -->
+    <div class="absolute inset-0 opacity-0 group-hover:opacity-10
+                transition-opacity duration-500 ease-in-out
+                rounded-2xl pointer-events-none"
+         [ngClass]="s.glow">
+    </div>
+
+    <!-- Label -->
+    <p class="text-sm text-gray-500 font-medium tracking-wide">
+      {{ s.label }}
+    </p>
+
+    <!-- Value -->
+    <p class="text-3xl font-bold mt-3
+              text-slate-800
+              transition-colors duration-300 ease-in-out
+              group-hover:text-slate-900">
+      {{ s.value }}
+    </p>
+
+  </div>
+
+</div>
+
+
+    <!-- PENDING TASKS -->
+    <div class="bg-white p-6 rounded-xl shadow">
+        <h2 class="text-lg font-semibold mb-4">My Pending Work</h2>
+
+        <table class="w-full text-sm">
+            <tr class="border-b text-gray-500">
+                <th class="py-2">Application</th>
+                <th>Applicant</th>
+                <th>Stage</th>
+                <th>Pending (days)</th>
+                <th></th>
+            </tr>
+
+            <tr *ngFor="let t of pendingTasks" class="border-b">
+                <td class="py-2">{{ t.id }}</td>
+                <td>{{ t.applicant }}</td>
+                <td>{{ t.stage }}</td>
+                <td>{{ t.daysPending }}</td>
+                <td>
+                    <a class="text-indigo-600 hover:underline">
+                        Review
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</section>

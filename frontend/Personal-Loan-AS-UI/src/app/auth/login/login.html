@@ -1,0 +1,141 @@
+<div class="login-page min-h-screen flex items-center justify-center
+         bg-gradient-to-br from-neutral-900 via-slate-900 to-stone-900
+         relative px-4">
+
+    <!-- ambient shapes -->
+    <div class="ambient-blob absolute -top-32 -left-32 w-[500px] h-[500px]
+           bg-stone-700/20 rounded-full blur-3xl animate-float">
+    </div>
+
+    <div class="ambient-blob absolute bottom-0 right-0 w-[400px] h-[400px]
+           bg-slate-700/20 rounded-full blur-3xl animate-float">
+    </div>
+
+    <!-- LOGIN CARD -->
+    <div class="login-card relative w-full max-w-md rounded-2xl
+           bg-stone-50 shadow-[0_25px_80px_-15px_rgba(0,0,0,0.6)]
+           p-10 overflow-hidden">
+
+        <!-- paper grain overlay -->
+        <div class="absolute inset-0 rounded-2xl
+             bg-gradient-to-br from-white/60 to-transparent
+             pointer-events-none">
+        </div>
+
+        <div class="relative z-10">
+
+            <!-- BRAND -->
+            <div class="login-brand mb-8 text-center">
+                <h2 class="text-4xl font-bold tracking-tight text-stone-900">
+                    CrediFlow
+                </h2>
+                <p class="text-xs uppercase tracking-widest text-stone-500 mt-1">
+                    Personal Loan System
+                </p>
+            </div>
+
+            <!-- FORM COPY -->
+            <div class="mb-6 text-left">
+                <h3 class="text-xl font-medium text-stone-800">Sign In</h3>
+                <p class="text-sm text-stone-500 mt-1">
+                    Secure access for authorized officers
+                </p>
+            </div>
+
+            <!-- FORM -->
+            <form [formGroup]="loginForm" (ngSubmit)="submit()" class="space-y-4">
+
+                <!-- EMAIL -->
+                <div class="login-field relative">
+                    <label class="block text-xs uppercase tracking-wider
+                   text-stone-600 mb-1">
+                        Email
+                    </label>
+                    <input type="email" formControlName="email" class="w-full px-4 py-3 rounded-lg bg-transparent
+                   border border-stone-300
+                   text-stone-900 placeholder-stone-400
+                   focus:outline-none focus:border-stone-600
+                   transition" />
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="login-field relative">
+                    <label class="block text-xs uppercase tracking-wider
+                   text-stone-600 mb-1">
+                        Password
+                    </label>
+
+                    <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="w-full px-4 py-3 rounded-lg bg-transparent
+                   border border-stone-300
+                   text-stone-900 placeholder-stone-400
+                   focus:outline-none focus:border-stone-600
+                   transition" />
+
+                    <button type="button" (click)="showPassword = !showPassword" class="absolute top-1/2 right-3 -translate-y-1/2
+                   text-stone-500 hover:text-stone-700">
+
+                        <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5
+                   c4.477 0 8.268 2.943 9.542 7
+                   -1.274 4.057-5.065 7-9.542 7
+                   -4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+
+                        <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19
+                   c-4.477 0-8.268-2.943-9.542-7
+                   a10.05 10.05 0 011.658-3.042
+                   m1.5-1.5a9.956 9.956 0 0112.5 12.5" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- FORGOT PASSWORD -->
+                <div class="text-right">
+                    <a routerLink="/forgot-password" class="text-xs text-stone-600
+                   hover:text-stone-800 transition">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" [disabled]="loginForm.invalid || loading" class="login-button w-full mt-2 py-3 rounded-lg
+                 bg-stone-900 text-stone-100
+                 font-medium tracking-wide transition
+                 disabled:bg-gray-400
+                 disabled:text-gray-700
+                 disabled:cursor-not-allowed
+                 disabled:hover:bg-gray-400">
+                    {{ loading ? 'Signing In...' : 'Enter Dashboard' }}
+                </button>
+
+                <!-- ERROR -->
+                <p *ngIf="errorMessage" class="text-red-600 text-sm text-center mt-2">
+                    {{ errorMessage }}
+                </p>
+            </form>
+
+            <!-- FOOTER LINKS -->
+            <p class="text-xs text-stone-500 mt-6 text-center">
+                New here?
+                <a routerLink="/register" class="text-stone-800 font-medium hover:underline">
+                    Create an account
+                </a>
+            </p>
+
+            <div class="mt-2 text-center">
+                <a routerLink="/" class="text-stone-600 text-sm
+                 hover:text-stone-800 transition">
+                    ← Back to Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

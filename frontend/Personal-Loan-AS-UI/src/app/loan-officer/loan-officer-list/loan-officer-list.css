@@ -1,0 +1,16 @@
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td {
+  white-space: nowrap;
+}

@@ -1,0 +1,19 @@
+<div class="flex justify-between mb-6">
+    <ng-container *ngFor="let step of steps; let i = index">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold" [ngClass]="
+          isActive(step.route)
+            ? 'bg-blue-600 text-white'
+            : 'bg-gray-300 text-gray-700'
+        ">
+                {{ i + 1 }}
+            </div>
+
+            <span class="text-sm font-medium" [ngClass]="
+          isActive(step.route) ? 'text-blue-600' : 'text-gray-600'
+        ">
+                {{ step.label }}
+            </span>
+        </div>
+    </ng-container>
+</div>

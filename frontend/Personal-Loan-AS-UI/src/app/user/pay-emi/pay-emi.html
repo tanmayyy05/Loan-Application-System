@@ -1,0 +1,44 @@
+<h2 class="text-2xl font-bold mb-6">
+    EMI Schedule — {{ loanId }}
+</h2>
+
+<div class="bg-white rounded-xl shadow p-6">
+    <table class="w-full">
+        <thead class="border-b">
+            <tr>
+                <th class="text-left py-2">Month</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let emi of emiSchedule" class="border-b">
+                <td class="py-3">{{ emi.month }}</td>
+                <td>₹{{ emi.amount }}</td>
+
+                <td>
+                    <span class="px-2 py-1 rounded text-sm" [ngClass]="{
+              'bg-green-100 text-green-700': emi.status === 'PAID',
+              'bg-yellow-100 text-yellow-700': emi.status === 'DUE',
+              'bg-gray-200 text-gray-600': emi.status === 'UPCOMING'
+            }">
+                        {{ emi.status }}
+                    </span>
+                </td>
+
+                <td>
+                    <button *ngIf="emi.status === 'DUE'" (click)="payEmi()"
+                        class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700">
+                        Pay Now
+                    </button>
+
+                    <span *ngIf="emi.status !== 'DUE'" class="text-gray-400">
+                        —
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

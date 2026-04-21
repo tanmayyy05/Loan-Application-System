@@ -1,0 +1,103 @@
+/* Dialog title */
+.dialog-title {
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+}
+
+/* Content spacing */
+.dialog-content {
+  padding-top: 16px;
+  min-width: 80%;
+}
+
+/* Key-value rows */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e5e7eb;
+  font-size: 14px;
+}
+
+.info-row span {
+  color: #6b7280;
+}
+
+.info-row strong {
+  color: #111827;
+}
+
+/* EMI highlight */
+.info-row.highlight {
+  background: #f0fdf4;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+}
+
+.info-row.highlight strong {
+  color: #15803d;
+  font-size: 16px;
+}
+
+/* Loading text */
+.loading {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Action buttons */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Disable state */
+button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+/* Congratulations header */
+.congrats-header {
+  text-align: center;
+  padding: 20px 16px 24px;
+  background: linear-gradient(135deg, #ecfeff, #f0fdf4);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.icon-wrapper {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 8px;
+  background: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon {
+  font-size: 32px;
+  color: #15803d;
+}
+
+.congrats-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #064e3b;
+  margin: 4px 0;
+}
+
+.congrats-subtitle {
+  font-size: 14px;
+  color: #065f46;
+  margin: 0;
+}
